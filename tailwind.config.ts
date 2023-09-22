@@ -36,6 +36,7 @@ const config: Config = {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				brand: 'hsl(var(--brand))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
@@ -53,7 +54,7 @@ const config: Config = {
 					foreground: 'hsl(var(--muted-foreground))',
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
+					DEFAULT: 'hsl(var(--accent) / 50%)',
 					foreground: 'hsl(var(--accent-foreground))',
 				},
 				popover: {
@@ -67,7 +68,8 @@ const config: Config = {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'brand-fade': 'url(/img/background.png)'
 			},
 			fontFamily: {
 				sans: ['Inter var', ...defaults.fontFamily.sans]

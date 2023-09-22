@@ -1,15 +1,13 @@
-'use client';
-
+import Header from '~/app/components/header';
 import Providers from '~/app/providers';
 import type { Metadata } from 'next';
-import './styles.css';
+import './global.css';
 
-import Header from '~/app/components/header';
 
-// export const metadata: Metadata = {
-// 	title: 'Unbound',
-// 	description: 'Discord mobile client aimed at providing the user control, stability and customizability.',
-// };
+export const metadata: Metadata = {
+	title: 'Unbound',
+	description: 'Discord mobile client aimed at providing the user control, stability and customizability.',
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode; }) {
 	return (
@@ -18,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
 				<link rel='stylesheet' href='https://rsms.me/inter/inter.css' />
 			</head>
 			<Providers>
-				<body>
+				<body className='bg-brand-fade bg-no-repeat bg-right-top bg-fixed'>
 					<Header />
 					{children}
 				</body>
