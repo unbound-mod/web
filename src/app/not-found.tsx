@@ -1,3 +1,7 @@
+'use client';
+
+import i18n from 'i18n';
+
 export default function NotFound() {
 	return <div className='absolute top-1/2 left-1/2 mr-[-50%] -translate-x-1/2 -transform-y-1/2'>
 		<div className='flex flex-grow items-center justify-center gap-3'>
@@ -6,7 +10,7 @@ export default function NotFound() {
 			</h1>
 			<div className='inline-block'>
 				<h2 className='text-sm font-normal m-0'>
-					This page could not be found.
+					{i18n.Messages.PAGE_NOT_FOUND}
 				</h2>
 			</div>
 		</div>

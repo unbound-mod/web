@@ -1,11 +1,11 @@
 'use client';
 
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '~/app/components/dropdown-menu';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '~/app/components/navigation-menu';
-import { useTheme } from '~/app/components/providers/theme-provider';
-import Separator from '~/app/components/separator';
-import Logo from '~/app/components/icons/logo';
-import Button from '~/app/components/button';
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@components/dropdown-menu';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@components/navigation-menu';
+import { useTheme } from '@components/providers/theme-provider';
+import Separator from '@components/separator';
+import Logo from '@components/icons/logo';
+import Button from '@components/button';
 import { Moon, Sun } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -15,39 +15,39 @@ function Header() {
 
 	return <nav key='header' className='sticky top-0 h-18 flex px-[20px] p-[10px] items-center gap-[10px] border-b text-card-foreground shadow-sm backdrop-blur z-10'>
 		<div className='container flex h-14 items-center gap-[10px] p-0 md:h-14'>
-			<a className='flex items-center gap-[10px] mr-[10px] cursor-pointer hover:opacity-75 transition-opacity' href='/'>
+			<Link className='flex items-center gap-[10px] mr-[10px] cursor-pointer hover:opacity-75 transition-opacity' href='/'>
 				<Logo width={64} height={64} />
-			</a>
+			</Link>
 			<Separator orientation='vertical' className='h-5 hidden sm:flex' />
 			<NavigationMenu className='w-full hidden sm:flex md:items-center md:w-auto'>
 				<NavigationMenuList>
 					<NavigationMenuItem className='cursor-pointer select-none'>
-						<NavigationMenuLink onClick={(e) => e.preventDefault()} className='uppercase font-semibold bg-transparent'>
-							<Link href='/'>
+						<Link passHref href='/'>
+							<NavigationMenuLink className='uppercase font-semibold bg-transparent'>
 								Home
-							</Link>
-						</NavigationMenuLink>
+							</NavigationMenuLink>
+						</Link>
 					</NavigationMenuItem>
 					<NavigationMenuItem className='cursor-pointer select-none'>
-						<NavigationMenuLink onClick={(e) => e.preventDefault()} className='uppercase font-semibold bg-transparent'>
-							<Link href='/plugins'>
+						<Link passHref href='/plugins'>
+							<NavigationMenuLink className='uppercase font-semibold bg-transparent'>
 								Plugins
-							</Link>
-						</NavigationMenuLink>
+							</NavigationMenuLink>
+						</Link>
 					</NavigationMenuItem>
 					<NavigationMenuItem className='cursor-pointer select-none'>
-						<NavigationMenuLink onClick={(e) => e.preventDefault()} className='uppercase font-semibold bg-transparent'>
-							<Link href='/themes'>
+						<Link passHref href='/themes'>
+							<NavigationMenuLink className='uppercase font-semibold bg-transparent'>
 								Themes
-							</Link>
-						</NavigationMenuLink>
+							</NavigationMenuLink>
+						</Link>
 					</NavigationMenuItem>
 					<NavigationMenuItem className='cursor-pointer select-none'>
-						<NavigationMenuLink onClick={(e) => e.preventDefault()} className='uppercase font-semibold bg-transparent'>
-							<Link href='/faq'>
+						<Link passHref href='/faq'>
+							<NavigationMenuLink className='uppercase font-semibold bg-transparent'>
 								FAQ
-							</Link>
-						</NavigationMenuLink>
+							</NavigationMenuLink>
+						</Link>
 					</NavigationMenuItem>
 				</NavigationMenuList>
 			</NavigationMenu>

@@ -1,4 +1,4 @@
-import type { DatabaseData, Database } from '@lib/database';
+import type { DatabaseData, Database } from '#lib/database';
 import { DB_COLLECTIONS } from '~/constants';
 import { MongoClient } from 'mongodb';
 

@@ -1,5 +1,7 @@
-export default function Plugins() {
-	return <div>
-		hi
-	</div>;
+function Page() {
+	return <main>
+		plugins
+	</main>;
 }
+
+export default Page;

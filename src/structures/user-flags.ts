@@ -1,4 +1,4 @@
-import { BitField } from '~/structures';
+import BitField from '~/structures/bitfield';
 
 export enum Flags {
 	DEVELOPER = 1 << 1,

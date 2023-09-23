@@ -1,5 +1,5 @@
 import defaults from 'tailwindcss/defaultTheme';
-import { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
 	darkMode: ['class', '[data-theme="dark"]'],
@@ -54,7 +54,7 @@ const config: Config = {
 					foreground: 'hsl(var(--muted-foreground))',
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent) / 50%)',
+					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))',
 				},
 				popover: {
@@ -73,7 +73,29 @@ const config: Config = {
 			},
 			fontFamily: {
 				sans: ['Inter var', ...defaults.fontFamily.sans]
-			}
+			},
+			keyframes: {
+				'accordion-down': {
+					from: {
+						height: '0'
+					},
+					to: {
+						height: 'var(--radix-accordion-content-height)'
+					},
+				},
+				'accordion-up': {
+					from: {
+						height: 'var(--radix-accordion-content-height)'
+					},
+					to: {
+						height: '0'
+					},
+				},
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+			},
 		}
 	}
 };

@@ -1,8 +1,7 @@
-import Header from '~/app/components/header';
-import Providers from '~/app/providers';
+import Header from '@components/header';
+import Providers from '@providers';
 import type { Metadata } from 'next';
 import './global.css';
-
 
 export const metadata: Metadata = {
 	title: 'Unbound',
@@ -18,7 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
 			<Providers>
 				<body className='bg-brand-fade bg-no-repeat bg-right-top bg-fixed'>
 					<Header />
-					{children}
+					<div className='container flex flex-col gap-[10px] p-10 min-h-[100vh] mt-5'>
+						{children}
+					</div>
 				</body>
 			</Providers>
 		</html>

@@ -1,4 +1,4 @@
-import { Connection, UserData } from '@structures/user';
+import type { Connection, UserData } from '#structures/user';
 import UserFlags from '~/structures/user-flags';
 import { getDatabase } from '~/lib/database';
 

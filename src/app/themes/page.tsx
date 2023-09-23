@@ -1,9 +1,7 @@
 function Page() {
-	return (
-		<main>
-			home
-		</main>
-	);
+	return <main>
+		themes
+	</main>;
 }
 
 export default Page;
