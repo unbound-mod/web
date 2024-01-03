@@ -3,7 +3,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '$components/accordion';
 
 function Page() {
-	return <main>
+	return <main className='py-10'>
 		<h2 className='scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0'>
 			Usage
 		</h2>
