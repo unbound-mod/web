@@ -27,13 +27,21 @@ const PARAMETERS_REGEX = /\{.+?\}/;
 const IntlProviderContext = createContext<IntlProviderState>(initial);
 
 function IntlProvider({ children, defaultLocale = 'en-US', storageKey = 'locale', ...props }: IntlProviderProps) {
-	const persisted = localStorage.getItem(storageKey) || (navigator as any).locale;
+	const [persisted, setPersisted] = useState(navigator.locale);
 	const [locale, setLocale] = useState(() => persisted && Locales[persisted as keyof typeof Locales] ? persisted : defaultLocale);
+	const [root, setRoot] = useState<HTMLElement | null>(null);
 
-	console.log(locale);
+	useEffect(() => {
+		const persisted = localStorage.getItem(storageKey);
+		if (persisted) setPersisted(persisted);
+
+		const root = window.document.documentElement;
+		if (root) setRoot(root);
+	}, []);
 
 	const updateLocale = useCallback(() => {
-		const root = window.document.documentElement;
+		if (!root) return;
+
 		root.setAttribute('data-locale', locale);
 
 		type Keys = keyof typeof IntlProvider.defaultMessages | keyof typeof Locales[keyof typeof Locales];
@@ -49,7 +57,7 @@ function IntlProvider({ children, defaultLocale = 'en-US', storageKey = 'locale'
 		}
 
 		IntlProvider.Messages = Object.assign(parsed);
-	}, [locale]);
+	}, [locale, root]);
 
 	useEffect(() => {
 		updateLocale();

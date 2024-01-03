@@ -27,7 +27,7 @@
 			"i18n": [
 				"./src/app/components/providers/intl-provider.tsx"
 			],
-			"@*": [
+			"$*": [
 				"./src/app/*"
 			],
 			"~/*": [

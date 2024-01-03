@@ -34,8 +34,4 @@ export async function GET(request: NextRequest, { params }: { params: { type: st
 			return NextResponse.json({}, { status: 404, statusText: 'File not found' });
 
 	}
-
-
-	console.log(params);
-	return NextResponse.json({});
 }

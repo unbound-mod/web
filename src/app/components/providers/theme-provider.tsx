@@ -17,7 +17,7 @@ type ThemeProviderState = {
 };
 
 const initial = {
-	_theme: 'system',
+	_theme: 'dark',
 	systemTheme: 'dark',
 	theme: 'dark',
 	setTheme: () => null,
@@ -25,18 +25,23 @@ const initial = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initial);
 
-export default function ThemeProvider({ children, defaultTheme = 'system', storageKey = 'theme', ...props }: ThemeProviderProps) {
-	const system = window.matchMedia('(prefers-color-scheme: dark)');
+export default function ThemeProvider({ children, defaultTheme = 'dark', storageKey = 'theme', ...props }: ThemeProviderProps) {
+	const [theme, setTheme] = useState(defaultTheme);
+	const [media, setMedia] = useState<MediaQueryList | null>(null);
+	const [systemTheme, setSystemTheme] = useState(() => (media?.matches ?? true) ? 'dark' : 'light');
 
-	const [theme, setTheme] = useState(() => localStorage.getItem(storageKey) || defaultTheme);
-	const [systemTheme, setSystemTheme] = useState(() => system.matches ? 'dark' : 'light');
+	useEffect(() => {
+		const system = window.matchMedia('(prefers-color-scheme: dark)');
+		system.onchange = (event) => setSystemTheme(event.matches ? 'dark' : 'light');
 
-	system.onchange = (event) => setSystemTheme(event.matches ? 'dark' : 'light');
+		setMedia(system);
+
+		const storage = localStorage.getItem(storageKey);
+		if (storage) setTheme(storage);
+	}, [storageKey]);
 
 	useEffect(() => {
 		const root = window.document.documentElement;
-
-		console.log('hi');
 
 		if (theme === 'system') {
 			root.setAttribute('data-theme', systemTheme);
@@ -77,7 +82,6 @@ export default function ThemeProvider({ children, defaultTheme = 'system', stora
 		</ThemeProviderContext.Provider>
 	);
 }
-
 export const useTheme = () => {
 	const context = useContext(ThemeProviderContext);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@components/accordion';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '$components/accordion';
 import i18n from 'i18n';
 
 function Page() {

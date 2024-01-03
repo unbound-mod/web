@@ -1,15 +1,24 @@
-import { Connections } from '~/structures/user';
-
-export interface Connection {
-	type: ConnectionType;
-	url: string;
+export interface RawUser {
+	id: string;
+	username: string;
+	discriminator: string;
+	avatar: string | null | undefined;
+	mfa_enabled?: boolean;
+	banner?: string | null | undefined;
+	accent_color?: number | null | undefined;
+	locale?: string;
+	verified?: boolean;
+	global_name?: string | null | undefined;
+	email?: string | null | undefined;
+	flags?: number;
+	premium_type?: number;
+	public_flags?: number;
 }
 
-export interface UserData {
-	displayName: string;
-	username: string;
-	flags: number;
-	bio: string;
+export interface UserSchema {
+	user: RawUser;
+	authorization: string;
+	refresh: string;
+	bio?: string;
 	id: string;
-	connections: Connection[];
 }

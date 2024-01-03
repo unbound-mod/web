@@ -30,6 +30,16 @@ const config: Config = {
 			sm: 'calc(var(--radius) - 4px)',
 		},
 		extend: {
+			fontSize: {
+				xxs: '0.5rem',
+				xxxs: '0.35rem'
+			},
+			scale: {
+				'10': '0.50'
+			},
+			gridTemplateColumns: {
+				footer: 'repeat(2,1fr)'
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -91,6 +101,17 @@ const config: Config = {
 						height: '0'
 					},
 				},
+				spinner: {
+					'0%': {
+						transform: 'scaleY(0.4)'
+					},
+					'50%': {
+						transform: 'scaleY(1.0)'
+					},
+					'100%': {
+						transform: 'scaleY(0.4)'
+					}
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
