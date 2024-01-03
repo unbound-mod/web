@@ -1,5 +1,5 @@
 function Page() {
-	return <main>
+	return <main className='py-10'>
 		themes
 	</main>;
 }
