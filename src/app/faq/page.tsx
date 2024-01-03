@@ -1,33 +1,34 @@
 'use client';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '$components/accordion';
-import i18n from 'i18n';
 
 function Page() {
 	return <main>
 		<h2 className='scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0'>
-			{i18n.Messages.FAQ_USAGE}
+			Usage
 		</h2>
 		<Accordion type='single' collapsible className='w-full'>
 			<AccordionItem value='halal'>
 				<AccordionTrigger className='font-bold'>
-					{i18n.Messages.FAQ_USAGE_INSTALL_TITLE}
+					How do I install Unbound?
 				</AccordionTrigger>
 				<AccordionContent>
-					{i18n.Messages.FAQ_USAGE_INSTALL_DESC}
+					{/* eslint-disable-next-line react/no-unescaped-entities */}
+					Good question.
 				</AccordionContent>
 			</AccordionItem>
 		</Accordion>
 		<h2 className='mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0'>
-			{i18n.Messages.FAQ_LEGAL}
+			Legal
 		</h2>
 		<Accordion type='single' collapsible className='w-full'>
 			<AccordionItem value='halal'>
 				<AccordionTrigger className='font-bold'>
-					{i18n.Messages.FAQ_LEGAL_BAN_TITLE}
+					Can Unbound get me banned?
 				</AccordionTrigger>
 				<AccordionContent>
-					{i18n.Messages.FAQ_LEGAL_BAN_DESC}
+					{/* eslint-disable-next-line react/no-unescaped-entities */}
+					Discord does not hand out bans for simply using Unbound. If you abuse or violate discord's policies while using Unbound, you risk account suspension.
 				</AccordionContent>
 			</AccordionItem>
 		</Accordion>

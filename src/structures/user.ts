@@ -1,4 +1,4 @@
-import type { Connection, UserData } from '#structures/user';
+import type { RawUser } from '#structures/user';
 import UserFlags from '~/structures/user-flags';
 import { getDatabase } from '~/lib/database';
 
@@ -8,20 +8,22 @@ export enum Connections {
 }
 
 class User {
-	connections: Connection[];
+	// connections: Connection[];
 	displayName?: string;
 	username: string;
 	flags: UserFlags;
 	id: string;
 
-	constructor(data: UserData) {
+	constructor(data: RawUser) {
 		this.username = data.username;
 		this.id = data.id;
 
-		this.connections = data.connections ?? [];
+		// this.connections = data.connections ?? [];
 		this.flags = new UserFlags(data.flags);
 
-		if (this.displayName) this.displayName = data.displayName;
+		if (data.global_name) {
+			this.displayName = data.global_name;
+		}
 	}
 
 	async save() {
@@ -36,7 +38,7 @@ class User {
 			flags: this.flags.bitfield,
 			username: this.username,
 			displayName: this.displayName,
-			connections: this.connections,
+			// connections: this.connections,
 			id: this.id
 		};
 	}

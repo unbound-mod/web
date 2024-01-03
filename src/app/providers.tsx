@@ -1,7 +1,6 @@
 'use client';
 
 import AuthProvider from '$components/providers/auth-provider';
-import { IntlProvider } from '$components/providers';
 import { initReactI18next } from 'react-i18next';
 import { I18nextProvider } from 'react-i18next';
 import { ThemeProvider } from 'next-themes';
@@ -28,9 +27,7 @@ export default function Providers(props: React.PropsWithChildren) {
 	return <AuthProvider>
 		<I18nextProvider i18n={i18n} defaultNS='translation'>
 			<ThemeProvider disableTransitionOnChange defaultTheme='dark'>
-				<IntlProvider>
-					{props.children}
-				</IntlProvider>
+				{props.children}
 			</ThemeProvider>
 		</I18nextProvider>
 	</AuthProvider>;

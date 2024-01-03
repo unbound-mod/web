@@ -1,5 +1,5 @@
 'use server';;
-import type { UserSchema } from '#structures/user';
+import type { RawUser, UserSchema } from '#structures/user';
 
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { getDatabase } from '~/lib/database';
@@ -25,7 +25,7 @@ export async function fetchAndUpdateUser(authorization: string, refresh: string)
 	const database = await getDatabase();
 
 	const users = database.db.collection('users');
-	let user = await OAuth.getUser(authorization).catch(() => null);
+	let user = await OAuth.getUser(authorization).catch(() => null) as RawUser;
 
 	if (!user) {
 		try {
@@ -34,7 +34,7 @@ export async function fetchAndUpdateUser(authorization: string, refresh: string)
 			setCookie('authorization', request.access_token, { maxAge: request.expires_in });
 			setCookie('refresh', request.refresh_token);
 
-			user = await OAuth.getUser(request.access_token);
+			user = await OAuth.getUser(request.access_token) as RawUser;
 		} catch (e) {
 			console.error('Failed to refresh access token, aborting.');
 
