@@ -55,7 +55,7 @@ function Header(props: React.HTMLProps<HTMLElement>) {
 				<Button
 					variant='outline'
 					size='icon'
-					onClick={() => router.push('/settings/account')}
+					onClick={() => router.push('/settings')}
 				>
 					<Settings2 size={18} />
 				</Button>
