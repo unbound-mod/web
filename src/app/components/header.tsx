@@ -3,15 +3,19 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '$components/navigation-menu';
 import Separator from '$components/separator';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '$components/hooks';
 import Logo from '$components/icons/logo';
 import Account from '$components/account';
 import { Settings2 } from 'lucide-react';
 import Button from '$components/button';
 import { cn } from '~/utilities';
 import Link from 'next/link';
+import { getCookie } from 'cookies-next';
 
 function Header(props: React.HTMLProps<HTMLElement>) {
+	const hasCookie = getCookie('authorization');
 	const router = useRouter();
+	const auth = useAuth();
 
 	return <nav {...props} key='header' className={cn('sticky top-0 flex px-[20px] p-[10px] items-center gap-[10px] border-b text-card-foreground shadow-sm backdrop-blur z-20', props.className)}>
 		<div className='container flex h-14 items-center gap-[10px] p-0 md:h-14'>
@@ -55,7 +59,7 @@ function Header(props: React.HTMLProps<HTMLElement>) {
 				<Button
 					variant='outline'
 					size='icon'
-					onClick={() => router.push('/settings')}
+					onClick={() => router.push(hasCookie || (!auth.loading && auth.isLoggedIn) ? '/settings/account' : '/settings/appearance')}
 				>
 					<Settings2 size={18} />
 				</Button>
