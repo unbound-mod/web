@@ -41,13 +41,18 @@ export function ThemeProvider(props: ThemeProviderProps) {
 
 	const actions = {
 		setTheme(theme: ThemeProviderState['theme']) {
+			if (theme === state.theme) return;
+
 			function set() {
 				localStorage.setItem(props.storageKey ?? 'app-theme', theme);
 				setState({ theme });
 			}
 
-			if (document.startViewTransition) {
+			const isFromSystem = (theme === 'system' && state.theme === state.systemTheme) || (state.theme === 'system' && theme === state.systemTheme);
+
+			if (document.startViewTransition && !isFromSystem) {
 				if (props.transitionDelay && props.transitionDelay != 0) {
+					console.log('started transition');
 					setTimeout(() => document.startViewTransition(set), props.transitionDelay);
 				} else {
 					document.startViewTransition(set);
@@ -56,7 +61,7 @@ export function ThemeProvider(props: ThemeProviderProps) {
 				return;
 			}
 
-			setState({ theme });
+			set();
 		},
 	};
 

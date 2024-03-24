@@ -3,10 +3,29 @@ import { createStore, type SetStoreFunction } from 'solid-js/store';
 import Cookies from 'js-cookie';
 import { APIRoutes } from '~/constants';
 
+export type Account = {
+	id: string;
+	username: string;
+	avatar: string | void;
+	discriminator: string;
+	public_flags: number;
+	premium_type: number;
+	flags: number;
+	banner: string | void;
+	accent_color: number | void;
+	global_name: string;
+	avatar_decoration_data: string | void;
+	banner_color: string;
+	mfa_enabled: boolean;
+	locale: string;
+	email: string;
+	verified: boolean;
+};
+
 type AuthProviderState = {
 	isLoggedIn: boolean;
 	loading: boolean;
-	account: /*UserSchema*/ any | null;
+	account: Account | null;
 	tokens: {
 		authorization: string | undefined;
 		refresh: string | undefined;
@@ -47,7 +66,7 @@ async function fetchAccount([state, setState]: [AuthProviderState, SetStoreFunct
 
 	setState({ loading: true });
 
-	const res = await fetch('https://discord.com/api/users/@me', {
+	const res: Account | void = await fetch('https://discord.com/api/users/@me', {
 		headers: {
 			'Authorization': 'Bearer ' + state.tokens.authorization
 		}

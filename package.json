@@ -1,11 +1,10 @@
 {
-	"name": "unbound-web-solid",
+	"name": "@unbound/web",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Web frontend for Unbound.",
 	"main": "index.js",
 	"scripts": {
-		"dev": "env VITE_CJS_IGNORE_WARNING=true vite dev",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "env VITE_CJS_IGNORE_WARNING=true vite dev"
 	},
 	"keywords": [],
 	"author": "Mario <mariovparaschiv@gmail.com> (github.com/localip)",
@@ -17,10 +16,10 @@
 		"clsx": "^2.1.0",
 		"cva": "1.0.0-beta.1",
 		"js-cookie": "^3.0.5",
-		"lucide-solid": "^0.363.0",
 		"postcss": "^8.4.38",
 		"solid-icons": "^1.1.0",
 		"solid-js": "^1.8.16",
+		"solid-spring": "^0.0.7",
 		"tailwind-merge": "^2.2.2",
 		"tailwindcss": "^3.4.1",
 		"tailwindcss-animate": "^1.0.7",

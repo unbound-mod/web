@@ -23,6 +23,9 @@ const config: Config = {
 			},
 		},
 		extend: {
+			fontFamily: {
+				primary: 'Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+			},
 			colors: {
 				background: 'hsl(var(--bg))',
 				foreground: 'hsl(var(--fg))',

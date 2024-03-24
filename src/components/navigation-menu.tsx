@@ -1,8 +1,8 @@
 import type { FlowProps, JSX } from 'solid-js';
 import { cn } from '~/utilities';
 
-function NavigationMenuRoot(props: FlowProps) {
-	return <nav class='flex gap-4 items-center'>
+function NavigationMenuRoot(props: JSX.HTMLAttributes<HTMLElement> & FlowProps) {
+	return <nav {...props} class={cn('flex gap-2 items-center', props.class)}>
 		{props.children}
 	</nav>;
 }
@@ -10,7 +10,7 @@ function NavigationMenuRoot(props: FlowProps) {
 function NavigationMenuItem(props: JSX.AnchorHTMLAttributes<HTMLAnchorElement>) {
 	return <a
 		{...props}
-		class={cn('hover:bg-primary/20 cursor-pointer transition-colors duration-300 rounded-lg py-2 px-3 font-semibold flex justify-center items-center', props.class)}
+		class={cn('hover:bg-primary/10 active:bg-primary/10 cursor-pointer transition-colors duration-300 rounded-lg px-4 py-3 font-semibold flex justify-center items-center', props.class)}
 		onClick={props.onClick}
 		href={props.href}
 	>

@@ -13,7 +13,7 @@ function DropdownMenuCheckboxItem(props: BaseDropdown.DropdownMenuCheckboxItemPr
 function DropdownMenuItem(props: BaseDropdown.DropdownMenuItemProps) {
 	return <BaseDropdown.Item
 		{...props}
-		class={cn('px-2 py-1 rounded-md hover:bg-primary/10 dark:hover:bg-primary/20 cursor-pointer transition-colors duration-250 overflow-hidden', props.class)}
+		class={cn('px-3 py-2 rounded-md hover:bg-primary/10 dark:hover:bg-primary/20 cursor-pointer transition-colors duration-250 overflow-hidden', props.class)}
 	>
 		{props.children}
 	</BaseDropdown.Item>;
