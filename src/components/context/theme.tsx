@@ -1,5 +1,6 @@
 import { createContext, useContext, createEffect, type FlowProps } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import { usePrefersDark } from '~/components/hooks/useMediaQuery';
 
 type ThemeProviderState = {
 	theme: 'light' | 'dark' | 'system';
@@ -31,12 +32,12 @@ interface ThemeProviderProps extends FlowProps {
 
 export function ThemeProvider(props: ThemeProviderProps) {
 	const storage = localStorage.getItem(props.storageKey ?? 'app-theme') as ThemeProviderState['theme'];
-	const system = window.matchMedia('(prefers-color-scheme: dark)');
+	const isSystemDark = usePrefersDark();
 
 	const [state, setState] = createStore<ThemeProviderState>({
 		...defaultState,
 		theme: storage ?? defaultState.theme,
-		systemTheme: system.matches ? 'dark' : 'light'
+		systemTheme: isSystemDark() ? 'dark' : 'light'
 	});
 
 	const actions = {
@@ -52,7 +53,6 @@ export function ThemeProvider(props: ThemeProviderProps) {
 
 			if (document.startViewTransition && !isFromSystem) {
 				if (props.transitionDelay && props.transitionDelay != 0) {
-					console.log('started transition');
 					setTimeout(() => document.startViewTransition(set), props.transitionDelay);
 				} else {
 					document.startViewTransition(set);
@@ -65,8 +65,6 @@ export function ThemeProvider(props: ThemeProviderProps) {
 		},
 	};
 
-	system.onchange = (event) => setState({ systemTheme: event.matches ? 'dark' : 'light' });
-
 	createEffect(() => {
 		const root = window.document.documentElement;
 
@@ -75,6 +73,9 @@ export function ThemeProvider(props: ThemeProviderProps) {
 		} else {
 			root.setAttribute('data-theme', state.theme);
 		}
+
+		const systemTheme = isSystemDark() ? 'dark' : 'light';
+		if (state.systemTheme !== systemTheme) setState({ systemTheme });
 	});
 
 	return (

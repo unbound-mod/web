@@ -1,11 +1,12 @@
 import { FiCheck, FiSun, FiMoon, FiMonitor, FiMenu, FiHome, FiList, FiBookmark } from 'solid-icons/fi';
-import NavigationMenu from '~/components/navigation-menu';
 import { type JSX, Show, Switch, Match, createSignal } from 'solid-js';
+import useBreakpoint from '~/components/hooks/useBreakpoint';
+import NavigationMenu from '~/components/navigation-menu';
 import DropdownMenu from '~/components/dropdown-menu';
 import { useTheme } from '~/components/context/theme';
 import Separator from '~/components/separator';
 import { useNavigate } from '@solidjs/router';
-import { createSpring } from 'solid-spring';
+import { useLocation } from '@solidjs/router';
 import Account from '~/components/account';
 import { Logo } from '~/components/icons';
 import Button from '~/components/button';
@@ -15,9 +16,9 @@ import { cn } from '~/utilities';
 function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 	const [navOpen, setNavOpen] = createSignal();
 	const [themes, { setTheme }] = useTheme();
+	const isMedium = useBreakpoint('md');
+	const location = useLocation();
 	const navigate = useNavigate();
-
-	createSpring;
 
 	return <>
 		<div class={cn('sticky h-18 flex px-5 py-3 items-center border-b', props.class, !navOpen() && 'shadow-sm')}>
@@ -89,21 +90,41 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 				</div>
 			</div>
 		</div>
-		<Show when={navOpen()}>
-			<div class='px-5 py-3 container flex flex-col w-full justify-center gap-4 borber border-b shadow-sm'>
-				<NavigationMenu.Item class='flex items-center justify-start gap-4 text-base' href='/' onClick={e => (e.preventDefault(), navigate('/'))}>
+		<Show when={navOpen() && !isMedium()}>
+			<div class='p-3 container flex flex-col w-full justify-center gap-4 borber border-b shadow-sm'>
+				<NavigationMenu.Item
+					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/' && 'text-primary-fg')}
+					href='/'
+					onClick={e => (e.preventDefault(), navigate('/'))}
+				>
 					<FiHome size={20} /> Home
 				</NavigationMenu.Item>
-				<NavigationMenu.Item class='flex items-center justify-start gap-4 text-base' href='/plugins' onClick={e => (e.preventDefault(), navigate('/plugins'))}>
+				<NavigationMenu.Item
+					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/plugins' && 'text-primary-fg')}
+					href='/plugins'
+					onClick={e => (e.preventDefault(), navigate('/plugins'))}
+				>
 					<FiList size={20} /> Plugins
 				</NavigationMenu.Item>
-				<NavigationMenu.Item class='flex items-center justify-start gap-4 text-base' href='/themes' onClick={e => (e.preventDefault(), navigate('/themes'))}>
+				<NavigationMenu.Item
+					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/themes' && 'text-primary-fg')}
+					href='/themes'
+					onClick={e => (e.preventDefault(), navigate('/themes'))}
+				>
 					<FiList size={20} /> Themes
 				</NavigationMenu.Item>
-				<NavigationMenu.Item class='flex items-center justify-start gap-4 text-base' href='/developers' onClick={e => (e.preventDefault(), navigate('/developers'))}>
+				<NavigationMenu.Item
+					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/developers' && 'text-primary-fg')}
+					href='/developers'
+					onClick={e => (e.preventDefault(), navigate('/developers'))}
+				>
 					<FiList size={20} /> Developers
 				</NavigationMenu.Item>
-				<NavigationMenu.Item class='flex items-center justify-start gap-4 text-base' href='/faq' onClick={e => (e.preventDefault(), navigate('/faq'))}>
+				<NavigationMenu.Item
+					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/faq' && 'text-primary-fg')}
+					href='/faq'
+					onClick={e => (e.preventDefault(), navigate('/faq'))}
+				>
 					<FiBookmark size={20} /> FAQ
 				</NavigationMenu.Item>
 			</div>
