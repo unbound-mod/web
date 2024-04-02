@@ -1,6 +1,6 @@
 import { createContext, useContext, createEffect, type FlowProps } from 'solid-js';
-import { createStore } from 'solid-js/store';
 import { usePrefersDark } from '~/components/hooks/useMediaQuery';
+import { createStore } from 'solid-js/store';
 
 type ThemeProviderState = {
 	theme: 'light' | 'dark' | 'system';

@@ -7,7 +7,7 @@
 		"dev": "env VITE_CJS_IGNORE_WARNING=true vite dev"
 	},
 	"keywords": [],
-	"author": "Mario <mariovparaschiv@gmail.com> (github.com/localip)",
+	"author": "Mario <me@marioparaschiv.com> (github.com/marioparaschiv)",
 	"license": "Unlicensed",
 	"dependencies": {
 		"@kobalte/core": "^0.12.6",

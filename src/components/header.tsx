@@ -91,7 +91,7 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 			</div>
 		</div>
 		<Show when={navOpen() && !isMedium()}>
-			<div class='p-3 container flex flex-col w-full justify-center gap-4 borber border-b shadow-sm'>
+			<div class='p-3 container flex flex-col w-full justify-center gap-y-1 borber border-b shadow-sm'>
 				<NavigationMenu.Item
 					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/' && 'text-primary-fg')}
 					href='/'
