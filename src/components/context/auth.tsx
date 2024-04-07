@@ -1,7 +1,7 @@
-import { createContext, type FlowProps, useContext, createResource, type Setter } from 'solid-js';
+import { createContext, type FlowProps, useContext, createResource, type Setter, onMount } from 'solid-js';
 import { createStore, type SetStoreFunction } from 'solid-js/store';
-import Cookies from 'js-cookie';
 import { APIRoutes } from '~/constants';
+import Cookies from 'js-cookie';
 
 export type Account = {
 	id: string;
@@ -49,8 +49,8 @@ const defaultState = {
 	loading: false,
 	account: null,
 	tokens: {
-		authorization: Cookies.get('authorization_token'),
-		refresh: Cookies.get('refresh_token')
+		authorization: localStorage.getItem('token') || Cookies.get('token'),
+		refresh: localStorage.getItem('refresh_token') || Cookies.get('refresh_token')
 	}
 };
 
@@ -66,31 +66,49 @@ async function fetchAccount([state, setState]: [AuthProviderState, SetStoreFunct
 
 	setState({ loading: true });
 
-	const res: Account | void = await fetch('https://discord.com/api/users/@me', {
+	const account: Account | void = await fetch('https://discord.com/api/users/@me', {
 		headers: {
 			'Authorization': 'Bearer ' + state.tokens.authorization
 		}
 	}).then(r => r.json()).catch(() => null);
 
 
-	if (!res) {
+	if (!account) {
 		setState({ loading: false });
 		return;
 	}
 
-	setState({ loading: false, isLoggedIn: true, account: res });
+	setState({ loading: false, isLoggedIn: true, account });
 }
 
 export function AuthProvider(props: FlowProps) {
 	const [state, setState] = createStore<AuthProviderState>(defaultState);
 	const [, { refetch, mutate }] = createResource([state, setState], fetchAccount);
 
+	// Migrate cookies to localStorage
+	onMount(() => {
+		const auth = Cookies.get('token');
+		if (auth) {
+			localStorage.setItem('token', auth);
+			Cookies.remove('token');
+		}
+
+		const refresh = Cookies.get('refresh_token');
+		if (refresh) {
+			localStorage.setItem('refresh_token', refresh);
+			Cookies.remove('refresh_token');
+		}
+	});
+
 	const actions = {
 		setState,
 		refetch,
 		mutate,
 		async logOut() {
-			Cookies.remove('authorization_token');
+			localStorage.removeItem('token');
+			localStorage.removeItem('refresh_token');
+
+			Cookies.remove('token');
 			Cookies.remove('refresh_token');
 
 			setState({
@@ -103,7 +121,7 @@ export function AuthProvider(props: FlowProps) {
 			const url = new URL(APIRoutes.Revoke);
 			url.searchParams.set('token', state.tokens.authorization);
 
-			await fetch(url, { method: 'POST' }).catch(() => null);
+			await fetch(url, { method: 'POST' });
 		},
 	};
 

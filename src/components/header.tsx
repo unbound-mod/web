@@ -9,6 +9,7 @@ import { useNavigate } from '@solidjs/router';
 import { useLocation } from '@solidjs/router';
 import Account from '~/components/account';
 import { Logo } from '~/components/icons';
+import { TbPuzzle } from 'solid-icons/tb';
 import Button from '~/components/button';
 import { As } from '@kobalte/core';
 import { cn } from '~/utilities';
@@ -111,7 +112,7 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 					href='/themes'
 					onClick={e => (e.preventDefault(), navigate('/themes'))}
 				>
-					<FiList size={20} /> Themes
+					<TbPuzzle size={20} /> Themes
 				</NavigationMenu.Item>
 				<NavigationMenu.Item
 					class={cn('flex items-center justify-start gap-4 text-base text-secondary-fg', location.pathname === '/developers' && 'text-primary-fg')}
