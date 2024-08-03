@@ -1,28 +1,28 @@
-import ThemeProvider from '~/components/context/theme';
 import AuthProvider from '~/components/context/auth';
 import { Route, Router } from '@solidjs/router';
+import Page from '~/components/layout/page';
 import Toaster from '~/components/toaster';
-import { lazy } from 'solid-js';
+import * as Routes from '~/routes';
+import { For } from 'solid-js';
 
-const Developers = lazy(() => import('~/routes/developers'));
-const Plugins = lazy(() => import('~/routes/plugins'));
-const Themes = lazy(() => import('~/routes/themes'));
-const Home = lazy(() => import('~/routes/home'));
-const FAQ = lazy(() => import('~/routes/faq'));
+const routes = Object.values(Routes);
 
 function App() {
 	return <>
 		<AuthProvider>
-			<ThemeProvider transitionDelay={175}>
-				<Toaster />
-				<Router>
-					<Route path='/' component={Home} />
+			{/* <ThemeProvider transitionDelay={175}> */}
+			<Toaster />
+			<Router root={Page}>
+				<For each={routes}>
+					{((route) => <Route path={route.path} component={route.Page} />)}
+				</For>
+				{/* <Route path='/' component={Home} />
 					<Route path='/plugins' component={Plugins} />
 					<Route path='/themes' component={Themes} />
 					<Route path='/developers' component={Developers} />
-					<Route path='/faq' component={FAQ} />
-				</Router>
-			</ThemeProvider>
+					<Route path='/faq' component={FAQ} /> */}
+			</Router>
+			{/* </ThemeProvider> */}
 		</AuthProvider>
 	</>;
 }

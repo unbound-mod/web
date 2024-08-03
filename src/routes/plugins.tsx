@@ -1,12 +1,15 @@
 import { Match, Switch, createResource } from 'solid-js';
-import Page from '~/components/layout/page';
 import { APIRoutes } from '~/constants';
 import { fetch } from '~/utilities';
 
-function Plugins() {
+export const headerOrder = 2;
+export const title = 'Plugins';
+export const path = '/plugins';
+
+export function Page() {
 	const [data, { refetch, mutate }] = createResource(fetchPlugins, { initialValue: [] });
 
-	return <Page>
+	return <div class='container mt-32'>
 		<Switch fallback={<Addons data={data()} />}>
 			<Match when={data.loading}>
 				<div>Loading</div>
@@ -15,7 +18,7 @@ function Plugins() {
 				<div>Error fetching plugins: {data.error}</div>
 			</Match>
 		</Switch>
-	</Page>;
+	</div>;
 }
 
 interface AddonsProps {
@@ -33,5 +36,3 @@ async function fetchPlugins() {
 
 	return addons ?? [];
 }
-
-export default Plugins;

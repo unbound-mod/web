@@ -10,7 +10,7 @@ function NavigationMenuRoot(props: JSX.HTMLAttributes<HTMLElement> & FlowProps) 
 function NavigationMenuItem(props: JSX.AnchorHTMLAttributes<HTMLAnchorElement>) {
 	return <a
 		{...props}
-		class={cn('hover:bg-primary/10 active:bg-primary/10 cursor-pointer transition-colors duration-200 rounded-lg px-4 py-3 font-semibold flex justify-center items-center', props.class)}
+		class={cn('cursor-pointer transition-colors duration-200 rounded-lg px-4 py-3 font-semibold flex justify-center items-center', props.class)}
 		onClick={props.onClick}
 		href={props.href}
 	>

@@ -6,7 +6,6 @@ const config: Config = {
 		'./index.html',
 		'./src/**/*.{js,ts,jsx,tsx,css,md,mdx,html,json,scss}',
 	],
-	darkMode: ['class', '[data-theme="dark"]'],
 	theme: {
 		screens: {
 			'sm': '725px',
@@ -23,13 +22,40 @@ const config: Config = {
 			},
 		},
 		extend: {
+			keyframes: {
+				'accordion-down': {
+					from: { height: '0' },
+					to: { height: 'var(--kb-accordion-content-height)' }
+				},
+				'accordion-up': {
+					from: { height: 'var(--kb-accordion-content-height)' },
+					to: { height: '0' }
+				}
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out'
+			},
 			fontFamily: {
-				primary: 'Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+				primary: 'Open Runde, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+				secondary: 'Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
+			},
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)',
+			},
+			boxShadow: {
+				topBorder: 'inset 0 1px 1px 0 hsla(var(--primary-fg) /.15)'
 			},
 			colors: {
 				background: 'hsl(var(--bg))',
 				foreground: 'hsl(var(--fg))',
+				accent: 'hsl(var(--accent))',
+				hover: 'hsl(var(--hover))',
+				active: 'hsl(var(--active))',
 				border: 'hsl(var(--border))',
+				brand: 'hsl(var(--brand))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					fg: 'hsl(var(--primary-fg))',
@@ -38,10 +64,15 @@ const config: Config = {
 					DEFAULT: 'hsl(var(--secondary))',
 					fg: 'hsl(var(--secondary-fg))',
 				},
+				opposite: {
+					DEFAULT: 'hsl(var(--opposite))',
+					fg: 'hsl(var(--opposite-fg))',
+				},
 				danger: {
 					DEFAULT: 'hsl(var(--danger))',
 					fg: 'hsl(var(--danger-fg))',
 				},
+				scrollbar: 'hsl(var(--scrollbar))'
 			}
 		},
 	},

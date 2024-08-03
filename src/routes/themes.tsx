@@ -1,9 +1,9 @@
-import Page from '~/components/layout/page';
+export const headerOrder = 3;
+export const title = 'Themes';
+export const path = '/themes';
 
-function Themes() {
-	return <Page>
+export function Page() {
+	return <div class='container mt-32'>
 		themes
-	</Page>;
+	</div>;
 }
-
-export default Themes;

@@ -1,9 +1,9 @@
-import Page from '~/components/layout/page';
+export const headerOrder = 4;
+export const title = 'Developers';
+export const path = '/developers';
 
-function Developers() {
-	return <Page>
+export function Page() {
+	return <div class='container mt-32'>
 		developers
-	</Page>;
+	</div>;
 }
-
-export default Developers;

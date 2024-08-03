@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [paths(), solid()],
 	server: {
-		port: 3000,
+		port: 80,
 		open: true
 	},
 	build: {

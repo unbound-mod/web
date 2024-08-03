@@ -22,10 +22,19 @@ function DropdownMenuItem(props: BaseDropdown.DropdownMenuItemProps) {
 function DropdownMenuContent(props: BaseDropdown.DropdownMenuContentProps) {
 	return <BaseDropdown.Content
 		{...props}
-		class={cn('border bg-background rounded-md p-1 min-w-24 data-[expanded]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 slide-in-from-top-10', props.class)}
+		class={cn('border z-20 bg-gradient-to-b from-primary/75 pointer-events-auto to-secondary/75 backdrop-blur-md text-secondary-fg rounded-md p-1 min-w-24 data-[expanded]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 slide-in-from-top-10', props.class)}
 	>
 		{props.children}
 	</BaseDropdown.Content>;
+}
+
+function DropdownMenuSubContent(props: BaseDropdown.DropdownMenuSubContentProps) {
+	return <BaseDropdown.SubContent
+		{...props}
+		class={cn('border z-20 bg-background rounded-md p-1 min-w-24 data-[expanded]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 slide-in-from-top-10', props.class)}
+	>
+		{props.children}
+	</BaseDropdown.SubContent>;
 }
 
 function DropdownMenuPortal(props: BaseDropdown.DropdownMenuPortalProps) {
@@ -38,6 +47,10 @@ function DropdownMenuArrow(props: BaseDropdown.DropdownMenuArrowProps) {
 	return <BaseDropdown.Arrow size={16} {...props} />;
 }
 
+function DropdownMenuSub(props: BaseDropdown.DropdownMenuArrowProps) {
+	return <BaseDropdown.Sub {...props} />;
+}
+
 export default {
 	Root: BaseDropdown.Root,
 	Trigger: BaseDropdown.Trigger,
@@ -46,5 +59,9 @@ export default {
 	Content: DropdownMenuContent,
 	CheckboxItem: DropdownMenuCheckboxItem,
 	Arrow: DropdownMenuArrow,
-	Icon: BaseDropdown.Icon
+	Icon: BaseDropdown.Icon,
+	Sub: DropdownMenuSub,
+	Separator: BaseDropdown.Separator,
+	SubTrigger: BaseDropdown.SubTrigger,
+	SubContent: DropdownMenuSubContent
 };

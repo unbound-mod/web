@@ -1,9 +1,13 @@
 import { toast } from 'solid-sonner';
 
-async function safeFetch(...args: Parameters<typeof fetch>) {
-	const res = await fetch(...args).then(r => r.json()).catch(() => null);
+interface FetchOptions {
+	useToast?: boolean;
+}
 
-	if (res?.error) {
+async function safeFetch(input: URL | RequestInfo, init?: RequestInit | undefined, { useToast = false }: FetchOptions = {}) {
+	const res = await fetch(input, init).then(r => r.json()).catch(() => null);
+
+	if (useToast && res?.error) {
 		toast('Action Failed', {
 			description: res.error,
 			closeButton: true,
