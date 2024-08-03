@@ -37,7 +37,7 @@ const config: Config = {
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontFamily: {
-				primary: 'Open Runde, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+				primary: 'Open Runde, Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
 				secondary: 'Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
 			},
 			borderRadius: {
