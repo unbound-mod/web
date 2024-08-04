@@ -1,4 +1,4 @@
-import { Separator as BaseSeparator } from "@kobalte/core";
+import { Separator as BaseSeparator } from '@kobalte/core';
 import { cn } from '~/utilities';
 
 function Separator(props: BaseSeparator.SeparatorRootProps) {
