@@ -95,7 +95,7 @@
 
 #home-page {
 	position: relative;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 #home-page::before {
