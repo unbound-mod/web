@@ -1,3 +1,4 @@
+export const showInHeader = true;
 export const headerOrder = 4;
 export const title = 'Developers';
 export const path = '/developers';

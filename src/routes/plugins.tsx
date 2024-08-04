@@ -2,6 +2,7 @@ import { Match, Switch, createResource } from 'solid-js';
 import { APIRoutes } from '~/constants';
 import { fetch } from '~/utilities';
 
+export const showInHeader = true;
 export const headerOrder = 2;
 export const title = 'Plugins';
 export const path = '/plugins';

@@ -1,5 +1,6 @@
 import Accordion from '~/components/accordion';
 
+export const showInHeader = true;
 export const headerOrder = 5;
 export const title = 'FAQ';
 export const path = '/faq';

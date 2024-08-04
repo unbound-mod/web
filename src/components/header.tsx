@@ -1,6 +1,5 @@
+import { type JSX, Show, createSignal, For, onMount, createEffect, onCleanup, createMemo } from 'solid-js';
 import { FiMenu, FiHome, FiList, FiBookmark } from 'solid-icons/fi';
-import { type JSX, Show, createSignal, For, onMount, createEffect, onCleanup } from 'solid-js';
-import Button from '~/components/button';
 import useBreakpoint from '~/components/hooks/useBreakpoint';
 import { useLocation, useNavigate } from '@solidjs/router';
 import NavigationMenu from '~/components/navigation-menu';
@@ -9,11 +8,12 @@ import { animated, createSpring } from 'solid-spring';
 import Separator from '~/components/separator';
 import Account from '~/components/account';
 import { TbPuzzle } from 'solid-icons/tb';
+import { Logo } from '~/components/icons';
+import Button from '~/components/button';
 import * as Routes from '~/routes';
 import { cn } from '~/utilities';
-import { Logo } from '~/components/icons';
 
-const routes = Object.values(Routes).sort((a, b) => a.headerOrder - b.headerOrder);
+const routes = Object.values(Routes).filter(r => r.showInHeader).sort((a, b) => a.headerOrder - b.headerOrder);
 
 function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 	const [expandedElement, setExpandedElement] = createSignal<HTMLAnchorElement | null>(null);
@@ -26,7 +26,11 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	const routeIndex = createMemo(() => routes.findIndex(r => r.path === location.pathname));
+	const hoveredRouteIndex = createMemo(() => routes.findIndex(r => r.path === (hovered()?.getAttribute('data-path'))));
+
 	const animation = createSpring(() => ({
+		display: 'none',
 		hovered: 0,
 		left: 0,
 		height: 0,
@@ -37,8 +41,14 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 	}));
 
 	function animate(immediate: boolean = false) {
-		const idx = routes.findIndex(r => r.path === (hovered()?.getAttribute('data-path') || location.pathname));
-		if (idx === -1) return;
+		console.log(hoveredRouteIndex(), routeIndex());
+
+		if (hoveredRouteIndex() === -1 && routeIndex() === -1) {
+			animation().display.set('none');
+			return;
+		} else if (hoveredRouteIndex() !== -1 || routeIndex() !== -1) {
+			animation().display.set('block');
+		};
 
 		if (hovered()) {
 			const { left, height, width, x } = hovered()!.getBoundingClientRect();
@@ -50,7 +60,7 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 			animation().width[isFirstRender() || immediate ? 'set' : 'start'](width);
 		} else {
 
-			const child = element()?.children[idx];
+			const child = element()?.children[routeIndex()];
 			if (!child) return;
 
 			const container = element()!.getBoundingClientRect();
