@@ -1,11 +1,8 @@
 import { Toaster as SonnerToaster } from 'solid-sonner';
-import { useTheme } from '~/components/context/theme';
 
 function Toaster() {
-	const [{ theme }] = useTheme();
-
 	return <SonnerToaster
-		theme={theme}
+		theme='dark'
 		richColors
 		class='toaster group'
 		toastOptions={{

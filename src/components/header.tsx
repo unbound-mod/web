@@ -3,7 +3,6 @@ import { FiMenu, FiHome, FiList, FiBookmark } from 'solid-icons/fi';
 import useBreakpoint from '~/components/hooks/useBreakpoint';
 import { useLocation, useNavigate } from '@solidjs/router';
 import NavigationMenu from '~/components/navigation-menu';
-import { useTheme } from '~/components/context/theme';
 import { animated, createSpring } from 'solid-spring';
 import Separator from '~/components/separator';
 import Account from '~/components/account';
@@ -21,7 +20,6 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 	const [hovered, setHovered] = createSignal<HTMLAnchorElement | null>(null);
 	const [isFirstRender, setFirstRender] = createSignal(true);
 	const [navOpen, setNavOpen] = createSignal(false);
-	const [themes, { setTheme }] = useTheme();
 	const isMedium = useBreakpoint('md');
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -41,9 +39,7 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 	}));
 
 	function animate(immediate: boolean = false) {
-		console.log(hoveredRouteIndex(), routeIndex());
-
-		if (hoveredRouteIndex() === -1 && routeIndex() === -1) {
+		if (!isMedium() || hoveredRouteIndex() === -1 && routeIndex() === -1) {
 			animation().display.set('none');
 			return;
 		} else if (hoveredRouteIndex() !== -1 || routeIndex() !== -1) {
@@ -51,7 +47,7 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 		};
 
 		if (hovered()) {
-			const { left, height, width, x } = hovered()!.getBoundingClientRect();
+			const { left, height, width } = hovered()!.getBoundingClientRect();
 
 			const container = hovered()!.parentElement!.getBoundingClientRect();
 
@@ -59,7 +55,6 @@ function Header(props: JSX.HTMLAttributes<HTMLDivElement>) {
 			animation().height[isFirstRender() || immediate ? 'set' : 'start'](height);
 			animation().width[isFirstRender() || immediate ? 'set' : 'start'](width);
 		} else {
-
 			const child = element()?.children[routeIndex()];
 			if (!child) return;
 

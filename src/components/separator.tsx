@@ -1,7 +1,8 @@
 import { Separator as BaseSeparator } from '@kobalte/core';
+import type { ComponentProps } from 'solid-js';
 import { cn } from '~/utilities';
 
-function Separator(props: BaseSeparator.SeparatorRootProps) {
+function Separator(props: ComponentProps<typeof BaseSeparator.Root>) {
 	return <BaseSeparator.Root
 		{...props}
 		class={cn(
